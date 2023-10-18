@@ -280,8 +280,15 @@ span {
     cursor: pointer;
     margin-left: auto;
     color: white;
-    margin-right: 28%;
+    margin-right: 38%;
     margin-top: 0px;
+    background-color: black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 30px;
+
   }
   .control_button :hover{
     background-color: #dddddd;
@@ -330,12 +337,30 @@ footer a{
 .chethan{
   display: none;
 }
-@media screen  and (max-width:1034px) {/*
+@media screen  and (max-width:1034px) {
   body{
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
+    margin-top: 2px;
   }
+  .nav{
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+  }
+
+  .title{
+    margin-top: 0px;
+    margin-bottom: 100px;
+  }
+
+  
+
+  .move,.yup,.yes,.ok,.zone{
+    display: none;
+  }
+  
+
   .move{
     margin-top: 0px;
     margin-right: px;
@@ -462,17 +487,18 @@ footer a{
   color: white;
   font-size: 25px;
 
-}*/
+}/*
 .head,.title,.meal-container,#about,#contact{
   display: none;
 }
 .chethan{
-  display: block;
+  display: none;
   margin-top: 35%;
   margin-left: 20%;
   margin-right: 20%;
   
 }
+*/
 
 }
 
