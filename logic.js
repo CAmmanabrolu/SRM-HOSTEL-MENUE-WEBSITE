@@ -1,580 +1,179 @@
-I'll help you with the complete updated code for each main file. Let's start with each file one by one:
+const mealInfo1 = document.getElementById('mealInfo1');
+const mealInfo2 = document.getElementById('mealInfo2');
+const mealInfo3 = document.getElementById('mealInfo3');
+const mealInfo4 = document.getElementById('mealInfo4');
 
-1. First, let's create the updated **index.html**:
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SRM University Hostel Menu - Daily meal plans for students">
-    <title>SRM Hostel Menu</title>
-    <link rel="stylesheet" href="home.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="main-nav">
-        <div class="nav-container">
-            <div class="logo">
-                <i class="fas fa-utensils"></i>
-                <span>SRM Hostel Menu</span>
-            </div>
-            <div class="nav-links">
-                <a href="#breakfast" class="nav-link"><i class="fas fa-sun"></i> Breakfast</a>
-                <a href="#lunch" class="nav-link"><i class="fas fa-hamburger"></i> Lunch</a>
-                <a href="#snacks" class="nav-link"><i class="fas fa-cookie"></i> Snacks</a>
-                <a href="#dinner" class="nav-link"><i class="fas fa-moon"></i> Dinner</a>
-            </div>
-            <button class="theme-toggle">
-                <i class="fas fa-moon"></i>
-            </button>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <header class="hero">
-        <div class="hero-content">
-            <h1>Welcome to SRM Hostel Menu</h1>
-            <p>Discover today's delicious meals</p>
-            <div class="date-display">
-                <i class="fas fa-calendar"></i>
-                <span id="current-date"></span>
-            </div>
-        </div>
-    </header>
 
-    <!-- Menu Sections -->
-    <main class="menu-container">
-        <!-- Breakfast Section -->
-        <section id="breakfast" class="menu-section">
-            <div class="menu-card">
-                <div class="card-header">
-                    <i class="fas fa-sun"></i>
-                    <h2>Breakfast</h2>
-                    <span class="time">7:30 AM - 9:30 AM</span>
-                </div>
-                <div class="menu-items" id="breakfast-items">
-                    <!-- Menu items will be loaded dynamically -->
-                </div>
-            </div>
-        </section>
 
-        <!-- Lunch Section -->
-        <section id="lunch" class="menu-section">
-            <div class="menu-card">
-                <div class="card-header">
-                    <i class="fas fa-hamburger"></i>
-                    <h2>Lunch</h2>
-                    <span class="time">12:30 PM - 2:30 PM</span>
-                </div>
-                <div class="menu-items" id="lunch-items">
-                    <!-- Menu items will be loaded dynamically -->
-                </div>
-            </div>
-        </section>
+const now = new Date();
+const dayOfWeek = now.getDay(); // 0 (Sunday) to 6 (Saturday)
+const hour = now.getHours();
+const weekNumber = getWeekNumber(now); // Get the week number
 
-        <!-- Snacks Section -->
-        <section id="snacks" class="menu-section">
-            <div class="menu-card">
-                <div class="card-header">
-                    <i class="fas fa-cookie"></i>
-                    <h2>Evening Snacks</h2>
-                    <span class="time">4:30 PM - 5:30 PM</span>
-                </div>
-                <div class="menu-items" id="snacks-items">
-                    <!-- Menu items will be loaded dynamically -->
-                </div>
-            </div>
-        </section>
+const isOddWeek = weekNumber % 2 === 1; // Check if it's an odd week
 
-        <!-- Dinner Section -->
-        <section id="dinner" class="menu-section">
-            <div class="menu-card">
-                <div class="card-header">
-                    <i class="fas fa-moon"></i>
-                    <h2>Dinner</h2>
-                    <span class="time">7:30 PM - 9:30 PM</span>
-                </div>
-                <div class="menu-items" id="dinner-items">
-                    <!-- Menu items will be loaded dynamically -->
-                </div>
-            </div>
-        </section>
-    </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Contact Us</h3>
-                <p><i class="fas fa-phone"></i> +91 XXXXXXXXXX</p>
-                <p><i class="fas fa-envelope"></i> hostel@srmist.edu.in</p>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <a href="#breakfast">Breakfast</a>
-                <a href="#lunch">Lunch</a>
-                <a href="#snacks">Snacks</a>
-                <a href="#dinner">Dinner</a>
-            </div>
-            <div class="footer-section">
-                <h3>Follow Us</h3>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 SRM Hostel Menu. All rights reserved.</p>
-        </div>
-    </footer>
 
-    <!-- Loading Spinner -->
-    <div class="loader" id="loader">
-        <div class="spinner"></div>
-    </div>
+// Function to show the previous menu
 
-    <script src="logic.js"></script>
-</body>
-</html>
-```
 
-2. Updated **home.css**:
-```css
-:root {
-    /* Primary Colors */
-    --primary-blue: #2196F3;
-    --primary-orange: #FF5722;
-    --bg-light: #F8F9FA;
-    --bg-white: #FFFFFF;
-    --text-dark: #212529;
-    --text-gray: #6C757D;
-    --accent-green: #4CAF50;
-    --accent-red: #F44336;
+// Function to show the next menu
 
-    /* Dark Mode Colors */
-    --dark-bg: #121212;
-    --dark-card: #1E1E1E;
-    --dark-text: #E0E0E0;
-}
 
-/* Reset and Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: var(--bg-light);
-    color: var(--text-dark);
-    line-height: 1.6;
-    transition: background-color 0.3s ease;
-}
-
-/* Navigation Styles */
-.main-nav {
-    background: var(--bg-white);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-}
-
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--primary-blue);
-}
-
-.nav-links {
-    display: flex;
-    gap: 2rem;
-}
-
-.nav-link {
-    color: var(--text-dark);
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.nav-link:hover {
-    background-color: var(--primary-blue);
-    color: white;
-}
-
-/* Hero Section */
-.hero {
-    background: linear-gradient(135deg, var(--primary-blue), #1976D2);
-    color: white;
-    padding: 8rem 2rem 4rem;
-    text-align: center;
-}
-
-.hero-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.hero h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-}
-
-.date-display {
-    margin-top: 2rem;
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-/* Menu Container */
-.menu-container {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-/* Menu Cards */
-.menu-card {
-    background: var(--bg-white);
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease;
-}
-
-.menu-card:hover {
-    transform: translateY(-5px);
-}
-
-.card-header {
-    background: var(--primary-blue);
-    color: white;
-    padding: 1.5rem;
-    text-align: center;
-}
-
-.card-header i {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
-
-.time {
-    display: block;
-    font-size: 0.9rem;
-    opacity: 0.9;
-    margin-top: 0.5rem;
-}
-
-/* Menu Items */
-.menu-items {
-    padding: 1.5rem;
-}
-
-.menu-item {
-    padding: 1rem;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-    transition: background-color 0.3s ease;
-}
-
-.menu-item:last-child {
-    border-bottom: none;
-}
-
-.menu-item:hover {
-    background-color: rgba(33,150,243,0.05);
-}
-
-.item-info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.veg-badge {
-    background: var(--accent-green);
-    color: white;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    font-size: 0.8rem;
-}
-
-/* Footer */
-.footer {
-    background: var(--text-dark);
-    color: var(--bg-light);
-    padding: 3rem 1rem 1rem;
-    margin-top: 4rem;
-}
-
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-}
-
-.footer-section h3 {
-    margin-bottom: 1rem;
-    color: var(--primary-blue);
-}
-
-.footer-section a {
-    color: var(--bg-light);
-    text-decoration: none;
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-.social-links {
-    display: flex;
-    gap: 1rem;
-}
-
-.social-links a {
-    font-size: 1.5rem;
-}
-
-.footer-bottom {
-    text-align: center;
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255,255,255,0.1);
-}
-
-/* Loading Spinner */
-.loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255,255,255,0.9);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    display: none;
-}
-
-.spinner {
-    width: 50px;
-    height: 50px;
-    border: 5px solid var(--bg-light);
-    border-top: 5px solid var(--primary-blue);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Dark Mode */
-body.dark-mode {
-    background-color: var(--dark-bg);
-    color: var(--dark-text);
-}
-
-body.dark-mode .main-nav,
-body.dark-mode .menu-card {
-    background-color: var(--dark-card);
-}
-
-body.dark-mode .nav-link {
-    color: var(--dark-text);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-    }
-    
-    .hero h1 {
-        font-size: 2rem;
-    }
-    
-    .menu-container {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.menu-section {
-    animation: fadeIn 0.5s ease-out;
-}
-```
-
-3. Updated **logic.js**:
-```javascript
-// Menu data structure
-const menuData = {
-    breakfast: [
-        { name: "Masala Dosa", type: "veg", description: "Crispy rice crepe with potato filling" },
-        { name: "Idli Sambar", type: "veg", description: "Steamed rice cakes with lentil soup" },
-        { name: "Poha", type: "veg", description: "Flattened rice with vegetables" }
+// Define common items for Breakfast and Snacks
+const breakfastItems = ['Tea', 'Coffee', 'Bread', 'Jam'];
+const snacksItems = ['Tea', 'Coffee', 'Bread', 'Jam'];
+const menusOdd = [
+    // Sunday
+    // ... (similar structure for other days of the week)
+    // Sunday
+    [
+        [`Breakfast Menu (Sunday - Odd Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Poori', 'Potato Bajji'],
+        [`Lunch Menu (Sunday - Odd Week):`, 'Chicken Briyani', 'Veg Briyani', 'Boondi Raitha', 'Rasam', 'Steam Rice','Butter Milk','Pickle','Ice Cream','Brinjal Salan','Appalam','Boiled Egg 1no'],
+        [`Snacks Menu (Sunday - Odd Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Bhel Puri'],
+        [`Dinner Menu (Sunday - Odd Week):`, 'Chappathi', 'Dal/Sabzi/Khorma', 'Variety Rice', 'Urulai Masala', 'Fryums','Banana 1no','Milk']
     ],
-    lunch: [
-        { name: "Rice and Dal", type: "veg", description: "Steamed rice with lentil curry" },
-        { name: "Chicken Curry", type: "non-veg", description: "Spicy chicken curry" },
-        { name: "Mixed Vegetables", type: "veg", description: "Assorted vegetables curry" }
+    // Monday
+    [
+        [`Breakfast Menu (Monday - Odd Week):`, 'Tea', 'Coffee', 'Bread', 'Jam','Pongal', 'Medhu vada', 'Gosthu', 'Coconut chutney'],
+        [`Lunch Menu (Monday - Odd Week):`, 'Jeera Chappathi', 'Dal/Sabzi/Khorma', 'White Rice', 'Kadhamba Sambar', 'Tomato Rasam','Urulai Pattani Masala','Butter Milk','Appalam','Pickle'],
+        [`Snacks Menu (Monday - Odd Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Fruit Muffin'],
+        [`Dinner Menu (Monday - Odd Week):`, 'Chappati', 'Veg Khorma', 'Variety Rice', 'Fryums', 'Dry Vegetable','Banana 1no','Milk','Pickle']
     ],
-    snacks: [
-        { name: "Samosa", type: "veg", description: "Crispy pastry with spiced potato filling" },
-        { name: "Tea/Coffee", type: "veg", description: "Hot beverages" },
-        { name: "Biscuits", type: "veg", description: "Assorted cookies" }
+    // Tuesday
+    [
+        [`Breakfast Menu (Tuesday - Odd Week):`, 'Tea', 'Coffee', 'Bread', 'Jam','Kal Dosa', 'Vada Curry', 'Pudhina Chutney'],
+        [`Lunch Menu (Tuesday - Odd Week):`, 'Masala Chappathi', 'Dal/Sabzi/Khorma', 'White Rice',],
+        [`Snacks Menu (Tuesday - Odd Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Spl Vada 80gm' ],
+        [`Dinner Menu (Tuesday - Odd Week):`, 'Chappathi', 'Dal/Sabzi/Khorma', 'White Rice', 'Avarakal Sambar', 'Tomato','Gobi peas poriyal','Buuter Milk','Fryums','Pickle','Milk']
     ],
-    dinner: [
-        { name: "Chapati", type: "veg", description: "Whole wheat flatbread" },
-        { name: "Paneer Butter Masala", type: "veg", description: "Cottage cheese in rich gravy" },
-        { name: "Rice", type: "veg", description: "Steamed rice" }
+    // Wednesday
+    [
+        [`Breakfast Menu (Wednesday - Odd Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Idly', 'Masala Vada ', 'Pumpkin Sambar', 'Kara Chutney'],
+        [`Lunch Menu (Wednesday - Odd Week):`, 'Triangle Chappati ', 'Dal/Sabzi/Khorma', 'White Rice',  'Kalyana Sambar', 'Paruppu Sambar','Kovvakal varuval(Chettinad)','Butter Milk','Appalam','Pickle'],
+        [`Snacks Menu (Wednesday - Odd Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Veg Puff'],
+        [`Dinner Menu (Wednesday - Odd Week):`, 'Triangle chappati', 'Paneer Butter Masala', 'White Rice', 'Vada Kozhambu', 'Paruppu Rasam','Butter Milk','Appalam','Pickle','Pooriyal','Chicken Masala','Sweet','Milk']
+    ],
+    // Thursday
+    [
+        [`Breakfast Menu (Thursday - Odd Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Veg Kitichidi', 'Veg Stew','Mint & Malli Chutney'],
+        [`Lunch Menu (Thursday - Odd Week):`, 'Methi Chapathi','Dal/Sabzi/Khorma','White Rice','Vendai More Kozhambu','Kalayana Rasam','Vazhakkai podimas','Butter Milk','Fryums','Pickle' ],
+        [`Snacks Menu (Thursday - Odd Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Veg Somosa'],
+        [`Dinner Menu (Thursday - Odd Week):`, 'Idly 2nos', 'Spl Chutney', 'White Rice', 'Udipi Sambar', 'Kalyana Rasam','Veg Usuli','Butter Milk','Fryums','PIckle','Milk']
+    ],
+    // Friday
+    [
+        [`Breakfast Menu (Friday - Odd Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Idly', 'Item2', 'Mix Veg Sambar', 'ONion Chutney'],
+        [`Lunch Menu (Friday - Odd Week):`, 'Chappati','Dal/Sabzi/Khorma', 'White Rice', 'Podalangal,Capsicum Sambar', 'Pineapple Rasam','Beet Chana Karaporiyal','Butter Milk','Appalam','Pickle'],
+        [`Snacks Menu (Friday - Odd Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Veg Roll'],
+        [`Dinner Menu (Friday - Odd Week):`, 'Chappati', 'Dal/Sabzi/Khorma', 'Veg Pulao', 'Crispy Vegetable', 'Banana 1no','Milk','Raitha']
+    ],
+    // Saturday
+    [
+        [`Breakfast Menu (Saturday - Odd Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Mini Podi Uthappam', 'Onion Sambar', 'Tomato Malli Chutney'],
+        [`Lunch Menu (Saturday - Odd Week):`, 'Chappati', 'Dal/Sabzi/Khorma', 'Bise Beha Bath', 'Dry Vegetable', 'White Rice','Jeera Poondu Rassam','Curd rice','Butter Milk', 'Fryums', 'Pickle'],
+        [`Snacks Menu (Saturday - Odd Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Beach Sundal'],
+        [`Dinner Menu (Saturday - Odd Week):`, 'Palak Chappati', 'Dal/Sabzi/Khorma', 'White Rice', 'Spl Kara Kozhambu', 'Carrot,Beans,Channa Poriyal','Mysore Rasam','Appalam','Pickle','Milk']
     ]
-};
 
-// DOM Elements
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize the page
-    updateDate();
-    loadMenuItems();
-    setupThemeToggle
-    // Menu data structure
-const menuData = {
-    breakfast: [
-        { name: "Masala Dosa", type: "veg", description: "Crispy rice crepe with potato filling" },
-        { name: "Idli Sambar", type: "veg", description: "Steamed rice cakes with lentil soup" },
-        { name: "Poha", type: "veg", description: "Flattened rice with vegetables" }
+    // ... (similar structure for other days of the week)
+];
+
+// Define menus for even and odd weeks
+const menusEven = [
+
+    // Sunday
+    [
+        [`Breakfast Menu (Sunday - Even Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Idiyappam', 'Veg Kitichidi', 'Veg Stew ', 'Mint Chutney'],
+        [`Lunch Menu (Sunday - Even Week):`, 'Chicken Briyani', 'Veg Briyani', 'Raitha', 'Rasam', 'Steam Rice', 'Butter Milk', 'Pickle', 'Ice Cream', 'Brinjal Salan', 'Appalam', 'Boiled Egg'],
+        [`Snacks Menu (Sunday - Even Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Bhel Puri'],
+        [`Dinner Menu (Sunday - Even Week):`, 'Chappati', 'Veg Khurma', 'Sambar Rice', 'Fryums', 'Pickle', 'Banana 1no', 'Milk']
     ],
-    lunch: [
-        { name: "Rice and Dal", type: "veg", description: "Steamed rice with lentil curry" },
-        { name: "Chicken Curry", type: "non-veg", description: "Spicy chicken curry" },
-        { name: "Mixed Vegetables", type: "veg", description: "Assorted vegetables curry" }
+    // Monday
+    [
+        [`Breakfast Menu (Monday - Even Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Idly', 'Medhu Vada', 'Brinjal Sambar', 'Kara Chutney'],
+        [`Lunch Menu (Monday - Even Week):`, 'Masala Chappati', 'Dal/Sabzi/Khurma', 'White Rice', 'Radish Mango Sambar', 'Garlic Rasam', 'Snake Guard Poriyal', 'Butter Milk', 'Appalam', ],
+        [`Snacks Menu (Monday - Even Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Kara Bonda'],
+        [`Dinner Menu (Monday - Even Week):`, 'Chappati', 'Kadalai Curry', 'White Rice', 'Garlic Rasam', 'Poriyal', 'Pickle', 'Banana no 1', 'Milk', 'Appalam']
     ],
-    snacks: [
-        { name: "Samosa", type: "veg", description: "Crispy pastry with spiced potato filling" },
-        { name: "Tea/Coffee", type: "veg", description: "Hot beverages" },
-        { name: "Biscuits", type: "veg", description: "Assorted cookies" }
+    // Tuesday
+    [
+        [`Breakfast Menu (Tuesday - Even Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Pongal', 'Parupu Vada', 'Gosthu', 'Coconut Chutney'],
+        [`Lunch Menu (Tuesday - Even Week):`, 'Meithi Chappathi', 'Dal/Sabzi/Khurma', 'White Rice', 'Pokora More kozhambu', 'Mysore Rasam', 'Yam KaraPoriyL', 'Butter Milk', 'Fryums', 'Pickle'],
+        [`Snacks Menu (Tuesday - Even Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Sambar Vada'],
+        [`Dinner Menu (Tuesday - Even Week):`, 'Chappati', 'Dal/Sabzi/Khurma', 'White Rice', 'Chow Chow Sambar', 'Tomato Rasam', 'Yam Chops', 'Butter Milk', 'Fryums', 'Pickle', 'Milk']
     ],
-    dinner: [
-        { name: "Chapati", type: "veg", description: "Whole wheat flatbread" },
-        { name: "Paneer Butter Masala", type: "veg", description: "Cottage cheese in rich gravy" },
-        { name: "Rice", type: "veg", description: "Steamed rice" }
+    // Wednesday
+    [
+        [`Breakfast Menu (Wednesday - Even Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Settu Dosa', 'Vada Curry', 'Pudhina Chutney'],
+        [`Lunch Menu (Wednesday - Even Week):`, 'Triangle Chappati', 'Dal/Sabzi/Khurma', 'White Rice', 'Aravai Sambar', 'Tomato Rasam', 'Cabbage Carrot Peas Poriyal', 'Butter Milk', 'Appalam', 'Pickle'],
+        [`Snacks Menu (Wednesday - Even Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Fruit Cake'],
+        [`Dinner Menu (Wednesday - Even Week):`, 'Triangle Chappati', 'Paneer Butter Masala', 'Vatha Kozhambu', 'Paruppu Rasam', 'Butter Milk', 'Appalam', 'Pickle', 'Poriyal', 'Chicken Masala', 'Sweet', 'Milk']
+    ],
+    // Thursday
+    [
+        [`Breakfast Menu (Thursday - Even Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Poori', 'Channa Masala/Potato Bajji'],
+        [`Lunch Menu (Thursday - Even Week):`, 'Chappati', 'Dal/Sabzi/Khurma', 'White Rice', 'Urundai Kozhambu', 'Kalyana Rasam', 'Beans Usuli', 'Butter Milk', 'Fryums', 'Pickle'],
+        [`Snacks Menu (Thursday - Even Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Onion Somosa'],
+        [`Dinner Menu (Thursday - Even Week):`, 'Idly ', 'Spl Chutney', 'White Rice', 'Udipi Sambar', 'Kalyana Rasam', 'Veg Usuli', 'Butter Milk', 'Fryums', 'Pickle', 'Milk']
+    ],
+    // Friday
+    [
+        [`Breakfast Menu (Friday - Even Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Idly', 'Masala Vada', 'Sambar', 'Tomato Malli Chutney'],
+        [`Lunch Menu (Friday - Even Week):`, 'Chappati', 'Dal/Sabzi/Khurma', 'White Rice', 'Kathri', 'Murungai Sambar', 'Malli Rasam', 'Potato Roast', 'Butter Milk', 'Appalam', 'Pickle', 'Sweet'],
+        [`Snacks Menu (Friday - Even Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Sweet Donut'],
+        [`Dinner Menu (Friday - Even Week):`, 'Chappati', 'Dal/Sabzi/Khurma', 'Mushroom Pulao', 'Gobi Manchurian', 'Banana 1 no', 'Milk', 'Raitha']
+    ],
+    // Saturday
+    [
+        [`Breakfast Menu (Saturday - Even Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Masala Uthappam', 'Sambar', 'Malli chutney', ],
+        [`Lunch Menu (Saturday - Even Week):`, 'Chappati', 'Dal/Sabzi/Khurma', 'White Rice', 'Cripsy dry veg', 'Jeera poondu rassam','Curd rice','Butter Milk','Fryums','Pickle'],
+        [`Snacks Menu (Saturday - Even Week):`, 'Tea', 'Coffee', 'Bread', 'Jam', 'Pattani Sundal'],
+        [`Dinner Menu (Saturday - Even Week):`, 'Mini Uthappam', 'Malli Chutney', 'White Rice', 'Mix veg sambar', 'Potato Kara Masala','Pepper Rasam','Appalam','Pickle','Milk','Sweet']
     ]
-};
 
-// Function to update current date
-function updateDate() {
-    const dateElement = document.getElementById('current-date');
-    const currentDate = new Date();
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    dateElement.textContent = currentDate.toLocaleDateString('en-US', options);
+    // ... (similar structure for other days of the week)
+];
+
+
+
+
+// Determine which menu to use based on the week type
+const menu = isOddWeek ? menusOdd[dayOfWeek] : menusEven[dayOfWeek];
+
+if (hour >= 0 && hour < 9) {
+    displayMenu(menu, 0); // Breakfast
+} else if (hour >= 9 && hour < 14) {
+    displayMenu(menu, 1); // Lunch
+} else if (hour >= 14 && hour < 17) {
+    displayMenu(menu, 2); // Snacks
+} else {
+    displayMenu(menu, 3); // Dinner
 }
 
-// Function to create menu item HTML
-function createMenuItem(item) {
-    return `
-        <div class="menu-item">
-            <div class="item-info">
-                <h3>${item.name}</h3>
-                <span class="${item.type}-badge">${item.type}</span>
-            </div>
-            <p class="item-description">${item.description}</p>
-        </div>
-    `;
-}
+function displayMenu(menuArray, mealIndex) {
+    mealInfo1.textContent = menuArray[mealIndex][0];
 
-// Function to load menu items
-function loadMenuItems() {
-    // Show loading animation
-    const loader = document.getElementById('loader');
-    loader.style.display = 'flex';
-
-    try {
-        // Load items for each meal type
-        Object.keys(menuData).forEach(mealType => {
-            const container = document.getElementById(`${mealType}-items`);
-            if (container) {
-                container.innerHTML = menuData[mealType]
-                    .map(item => createMenuItem(item))
-                    .join('');
-            }
-        });
-    } catch (error) {
-        console.error('Error loading menu items:', error);
-    } finally {
-        // Hide loading animation
-        loader.style.display = 'none';
-    }
-}
-
-// Theme toggle functionality
-function setupThemeToggle() {
-    const themeToggle = document.querySelector('.theme-toggle');
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const icon = themeToggle.querySelector('i');
-            icon.classList.toggle('fa-sun');
-            icon.classList.toggle('fa-moon');
-        });
-    }
-}
-
-// Smooth scrolling
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth'
-            });
+    // Loop through the items and display them
+    for (let i = 1; i < menuArray[mealIndex].length; i++) {
+        const item = document.createElement('p');
+        item.textContent = menuArray[mealIndex][i];
+        if (i <= 4) {
+            mealInfo2.appendChild(item);
+        } else if (i <= 8) {
+            mealInfo3.appendChild(item);
+        } else {
+            mealInfo4.appendChild(item);
         }
-    });
-});
+    }
+}
 
-// Initialize everything when the page loads
-document.addEventListener('DOMContentLoaded', () => {
-    updateDate();
-    loadMenuItems();
-    setupThemeToggle();
-});
-
-// Add this to check if the script is loading properly
-console.log('Menu script loaded successfully');
+function getWeekNumber(date) {
+    const startOfYear = new Date(date.getFullYear(), 0, 1);
+    var days = Math.floor((date - startOfYear) /
+        (24 * 60 * 60 * 1000));
+    var weekNumber = Math.ceil(days / 7);
+    console.log(weekNumber)
+    return weekNumber;
+}
