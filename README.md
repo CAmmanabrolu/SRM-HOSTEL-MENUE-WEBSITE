@@ -1,4 +1,4 @@
-# SRM RMP Hostel Menu Website🍽️
+# SRM RMP HOSTEL MENU WEBSITE🍽️
 
 ## Overview✨
 The **SRM RMP Hostel Menu Website** is a web application designed to provide students of SRM University with easy access to daily, weekly, and monthly hostel meal plans. The website offers a user-friendly interface with detailed nutritional information and real-time updates on menu changes.
